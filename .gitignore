@@ -1,0 +1,10 @@
+# Composer'ın indirdiği kütüphane klasörü
+src/vendor/
+
+# SQLite veritabanı dosyaları (Sadece yapı .sql olarak tutulur)
+*.sqlite
+*.sqlite-journal
+
+# Veritabanı programı ayar dosyası
+*.sqbpro
+

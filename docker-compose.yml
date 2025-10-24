@@ -1,0 +1,29 @@
+# Docker Compose dosya formatının versiyonunu belirtiyoruz
+version: '3.8'
+
+# Çalıştırılacak servisleri (container'ları) tanımlıyoruz
+services:
+  # 'app' adında bir servis oluşturuyoruz (istediğiniz adı verebilirsiniz)
+  app:
+    # Bu servis için kullanılacak Dockerfile'ın bulunduğu yeri belirtiyoruz.
+    # '.' işareti, bu dosyanın olduğu klasördeki Dockerfile'ı kullan demektir.
+    build: .
+
+    # Port yönlendirmesi:
+    # Bilgisayarınızın 8000 portuna gelen istekleri, container'ın 80 portuna (Apache'nin çalıştığı port) yönlendir.
+    # Böylece tarayıcıdan http://localhost:8000 adresine giderek projeye erişebilirsiniz.
+    ports:
+      - "8000:80"
+
+    # Klasör (volume) senkronizasyonu:
+    # Bu en önemli kısımdır. Bilgisayarınızdaki dosyalar ile container içindeki dosyaları birbirine bağlar.
+    volumes:
+      # 1. Kod Senkronizasyonu:
+      # Bilgisayarınızdaki './src' klasörünü, container içindeki '/var/www/html' (Apache'nin web kök dizini) klasörüne bağla.
+      # Bu sayede bilgisayarınızda bir PHP dosyasını kaydettiğiniz an, değişiklik anında container'a yansır.
+      - ./src:/var/www/html
+
+      # 2. Veritabanı Kalıcılığı:
+      # Bilgisayarınızdaki './database' klasörünü, container içindeki '/var/www/database' klasörüne bağla.
+      # Bu sayede SQLite veritabanı dosyası container silinse bile bilgisayarınızda güvende kalır. Verileriniz kaybolmaz.
+      - ./database:/var/www/database
