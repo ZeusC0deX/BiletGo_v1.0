@@ -1,2 +1,7 @@
 ![BiletGO Proje Logosu](./src/images/logo.png)
-Çalıştığı port localhost:8000
+
+ÇALIŞTIRMA
+
+Docker Komutu: docker compose up -d
+
+Tarayıcıdan açılacak adres: http://localhost:8000
